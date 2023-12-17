@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.weatherapplication.databinding.FragmentFirstBinding
@@ -31,7 +32,7 @@ class FirstFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentFirstBinding.inflate(inflater, container, false)
-        mainViewModel = MainViewModel()
+        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         return binding.root
     }
 

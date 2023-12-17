@@ -12,6 +12,7 @@ import com.example.weatherapplication.databinding.FragmentSecondBinding
 import com.example.weatherapplication.viewmodel.MainViewModel
 import android.widget.Button
 import android.widget.EditText
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.weatherapplication.model.CurrentWeatherResponse
@@ -30,7 +31,7 @@ class SecondFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSecondBinding.inflate(inflater, container, false)
-        mainViewModel = MainViewModel()
+        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,7 +59,9 @@ private fun subscribe() {
 
     mainViewModel.weatherData.observe(viewLifecycleOwner) { weatherData ->
         // Display weather data to the UI
-        setResultText(weatherData)
+        if (weatherData != null) {
+            setResultText(weatherData)
+        }
     }
 }
 
